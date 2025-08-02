@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CAN Data Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🚗 CAN Data Manager</h1>
+
+    <div class="tab-container">
+        <div class="tab active" onclick="switchTab('upload')">📁 Upload</div>
+        <div class="tab" onclick="switchTab('save')">💾 Save</div>
+        <div class="tab" onclick="switchTab('delete')">🗑️ Delete</div>
+    </div>
+
+    <div id="upload" class="tab-content active">
+        <div class="box">
+            <h2>Upload CAN Data to MySQL</h2>
+            <label><strong>Upload a Folder (e.g. split folders):</strong></label><br>
+            <input type="file" id="folderInput" webkitdirectory directory multiple><br><br>
+            <label><strong>OR Upload Individual Files:</strong></label><br>
+            <input type="file" id="fileInput" multiple><br><br>
+            <button onclick="uploadFiles()">Upload to MySQL</button>
+        </div>
+    </div>
+
+    <div id="save" class="tab-content">
+        <div class="box">
+            <h2>Export from MySQL</h2>
+            <p>Download CAN data as CSV files from your MySQL database.</p>
+            <button onclick="saveToLocal()">Download All</button>
+            <hr>
+            <h3>Uploaded Files</h3>
+            <table class="file-table" id="saveFileList">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filled dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="delete" class="tab-content">
+        <div class="box">
+            <h2>Delete from MySQL</h2>
+            <p>Remove CAN data entries from your local database.</p>
+            <h3>Stored Files</h3>
+            <table class="file-table" id="deleteFileList">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filled dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e3f2fd, #f1f8e9);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    background:#F08080;
+    color: white;
+    padding: 20px;
+    margin: 0;
+    font-size: 24px;
+}
+
+.tab-container {
+    display: flex;
+    background: #0056b3;
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.tab:hover {
+    background: hsl(235, 100%, 29%);
+}
+
+.tab.active {
+    background: #003d80;
+}
+
+.tab-content {
+    display: none;
+    padding: 30px;
+    background: #f9f9f9;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.box {
+    text-align: center;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+input[type="file"] {
+    margin: 20px 0;
+}
+
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #218838;
+}
+
+.file-table {
+    font-size: 0.85rem;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.file-table th,
+.file-table td {
+    padding: 6px 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.file-table td button {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
