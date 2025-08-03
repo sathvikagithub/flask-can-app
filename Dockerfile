@@ -1,21 +1,18 @@
-# Use official Python image
-FROM python:3.12-slim
+# Use Python base image
+FROM python:3.9-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Set work directory
+# Set workdir
 WORKDIR /app
 
-# Copy app code
-COPY . /app
+# Copy requirements and install them
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-RUN pip install --no-cache-dir flask flask-cors mysql-connector-python
+# Copy the entire app
+COPY . .
 
-# Expose Flask port
+# Expose the app port
 EXPOSE 5000
 
-# Run the app
-CMD ["python", "app.py"]
+# Run with Gunicorn
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]

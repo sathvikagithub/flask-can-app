@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 400779872048.dkr.ecr.ap-south-1.amazonaws.com
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_URI=400779872048.dkr.ecr.ap-south-1.amazonaws.com/flask-can-app:$IMAGE_TAG
+
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t $IMAGE_URI .
+      - docker tag $IMAGE_URI 400779872048.dkr.ecr.ap-south-1.amazonaws.com/flask-can-app:latest
+
+  post_build:
+    commands:
+      - echo Pushing the Docker images...
+      - docker push $IMAGE_URI
+      - docker push 400779872048.dkr.ecr.ap-south-1.amazonaws.com/flask-can-app:latest
+      - echo Writing image definitions...
+      - printf '[{"name":"flask-container","imageUri":"%s"}]' $IMAGE_URI > imagedefinitions.json
+
+artifacts:
+  files: imagedefinitions.json
